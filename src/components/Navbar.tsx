@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sun, Moon, Menu } from "lucide-react";
+import { Sun, Moon, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -17,21 +18,27 @@ const NAV_LINKS = [
 export function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => setMounted(true), []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
   return (
     <nav
       className={cn(
-        "sticky top-0 z-50 h-14 bg-background",
+        "sticky top-0 z-50 bg-background",
         "px-2 pt-2 pb-0"
       )}
     >
       <div
         className={cn(
           "mx-auto flex w-full max-w-3xl items-center justify-between",
-          "h-full"
+          "h-14"
         )}
       >
         {/* Left — Logo */}
@@ -80,11 +87,49 @@ export function Navbar() {
           </button>
 
           {/* Mobile menu button */}
-          <button className="text-muted-foreground hover:text-foreground sm:hidden">
-            <Menu size={18} />
+          <button
+            className="text-muted-foreground hover:text-foreground sm:hidden"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          >
+            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
+
+      {/* Mobile menu dropdown */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+            className="overflow-hidden sm:hidden"
+          >
+            <div className="flex flex-col gap-1 border-t border-border py-3 px-1">
+              {NAV_LINKS.map(({ href, label }) => {
+                const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    onClick={() => setMobileOpen(false)}
+                    className={cn(
+                      "rounded-md px-3 py-2 text-sm transition-colors duration-200",
+                      isActive
+                        ? "bg-secondary text-foreground font-medium"
+                        : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
+                    )}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
