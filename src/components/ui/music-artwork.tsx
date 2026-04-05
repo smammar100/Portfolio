@@ -137,13 +137,17 @@ export default function MusicArtwork({
 
       <div className="relative group">
         <div
-          className={`absolute -left-16 sm:-left-24 top-1/2 -translate-y-1/2 transition-all duration-500 ease-out ${
+          className={`absolute top-1/2 -translate-y-1/2 transition-all duration-500 ease-out ${
             isHovered
               ? 'opacity-100 translate-x-0'
               : 'opacity-0 translate-x-12 sm:translate-x-24'
           }`}
+          style={{ left: size ? `${-size * 0.45}px` : '-4rem' }}
         >
-          <div className="relative w-50 h-50 sm:w-70 sm:h-70">
+          <div
+            className={size ? '' : 'w-50 h-50 sm:w-70 sm:h-70'}
+            style={size ? { width: size, height: size } : undefined}
+          >
            <div
              ref={vinylRef}
              className="w-full h-full"
@@ -156,8 +160,8 @@ export default function MusicArtwork({
              <Image
                src="https://pngimg.com/d/vinyl_PNG95.png"
                alt="Vinyl Record"
-               width={80}
-               height={80}
+               width={size || 280}
+               height={size || 280}
                className="w-full h-full object-contain"
                unoptimized
              />
@@ -191,25 +195,18 @@ export default function MusicArtwork({
             <div className="absolute inset-0 bg-neutral-200 dark:bg-neutral-800 animate-pulse" />
           )}
 
-          <div className={`absolute bottom-2 left-2 transition-opacity duration-300 ${
+          <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
             isHovered ? 'opacity-100' : 'opacity-0'
           }`}>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-transparent rounded-full flex items-center justify-center shadow-lg">
-                {isPlaying ? (
-                  <div className="flex gap-0.5">
-                    <div className="w-0.5 h-3 bg-white rounded"></div>
-                    <div className="w-0.5 h-3 bg-white rounded"></div>
-                  </div>
-                ) : (
-                  <div className="w-0 h-0 border-l-[6px] border-l-white border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent ml-0.5"></div>
-                )}
-              </div>
-              <div className="sm:hidden">
-                <div className="text-white text-[10px] font-medium whitespace-nowrap bg-black/40 backdrop-blur-sm px-2 py-1 rounded">
-                  <span className="font-bold">{artist}</span> • {music}
+            <div className="w-14 h-14 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
+              {isPlaying ? (
+                <div className="flex gap-1">
+                  <div className="w-1 h-5 bg-white rounded"></div>
+                  <div className="w-1 h-5 bg-white rounded"></div>
                 </div>
-              </div>
+              ) : (
+                <div className="w-0 h-0 border-l-[10px] border-l-white border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent ml-1"></div>
+              )}
             </div>
           </div>
 
