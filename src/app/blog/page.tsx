@@ -2,6 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { BlogsSection } from "@/components/BlogsSection";
 import { LazyShader } from "@/components/LazyShader";
+import { PageTransition } from "@/components/motion";
 
 export default function BlogPage() {
   return (
@@ -13,14 +14,16 @@ export default function BlogPage() {
       </header>
       <main className="flex-1">
         <div className="mx-auto md:max-w-3xl">
-          <div className="section-divider" />
-          <BlogsSection />
-          <div className="section-divider" />
-          <Footer />
-          <div className="section-divider" />
-          <div className="border-x border-[var(--edge)] p-2">
-            <LazyShader className="h-40" />
-          </div>
+          <PageTransition>
+            <div className="section-divider" />
+            <BlogsSection />
+            <div className="section-divider" />
+            <Footer />
+            <div className="section-divider" />
+            <div className="border-x border-[var(--edge)] p-2">
+              <LazyShader className="h-40" />
+            </div>
+          </PageTransition>
         </div>
       </main>
     </>

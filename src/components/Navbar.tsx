@@ -1,14 +1,23 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Sun, Moon, Menu } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
+const NAV_LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/projects", label: "Projects" },
+  { href: "/blog", label: "Blog" },
+  { href: "/books", label: "Books" },
+];
+
 export function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => setMounted(true), []);
 
@@ -31,19 +40,24 @@ export function Navbar() {
         </Link>
 
         {/* Center — Nav links (hidden on mobile) */}
-        <div className="flex items-center gap-4 text-sm text-muted-foreground max-sm:hidden">
-          <Link href="/" className="hover:text-foreground">
-            Home
-          </Link>
-          <Link href="/projects" className="hover:text-foreground">
-            Projects
-          </Link>
-          <Link href="/blog" className="hover:text-foreground">
-            Blog
-          </Link>
-          <Link href="/books" className="hover:text-foreground">
-            Books
-          </Link>
+        <div className="flex items-center gap-4 text-sm max-sm:hidden">
+          {NAV_LINKS.map(({ href, label }) => {
+            const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={cn(
+                  "transition-colors duration-200",
+                  isActive
+                    ? "text-foreground font-medium"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                {label}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Right — Actions */}
