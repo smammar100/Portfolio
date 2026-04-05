@@ -71,9 +71,9 @@ export function ProfileHero({ className }: { className?: string }) {
         </button>
 
         {/* Info area */}
-        <div className="flex min-w-0 flex-1 flex-col gap-1">
+        <div className="flex min-w-0 flex-1 flex-col justify-between self-stretch">
           {/* Name + verified badge */}
-          <h1 className="flex items-center gap-1.5 font-heading font-black text-[30px] leading-tight tracking-normal text-foreground">
+          <h1 className="flex items-center gap-1.5 font-heading font-black text-[34px] leading-none tracking-normal text-foreground">
             Dhruv Jaradi
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +90,7 @@ export function ProfileHero({ className }: { className?: string }) {
           </h1>
 
           {/* Cycling tagline */}
-          <p className="font-mono text-sm leading-snug text-muted-foreground">
+          <p className="font-mono text-base leading-snug text-muted-foreground">
             <span className="inline-flex min-h-[1.25rem] min-w-[18ch] overflow-hidden">
               <span
                 className={cn(
@@ -104,7 +104,7 @@ export function ProfileHero({ className }: { className?: string }) {
           </p>
 
           {/* Status */}
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 text-base text-muted-foreground">
             <span className="relative flex size-2">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-75" />
               <span className="relative inline-flex size-2 rounded-full bg-success" />
