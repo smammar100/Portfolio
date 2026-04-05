@@ -34,40 +34,6 @@ export function AboutSection() {
           </li>
         </ul>
 
-        {/* Spotify Card */}
-        <div
-          className={cn(
-            "mt-6 flex max-w-sm items-center gap-3 rounded-xl",
-            "border border-border bg-card/80 p-3 mx-auto"
-          )}
-        >
-          {/* Album art placeholder */}
-          <div className="h-12 w-12 shrink-0 rounded-md bg-secondary" />
-
-          {/* Track info */}
-          <div className="min-w-0 flex-1">
-            <p className="flex items-center gap-1.5 text-xs text-success">
-              <span className="inline-block h-2 w-2 rounded-full bg-green-500" />
-              Last played
-            </p>
-            <p className="truncate text-sm font-semibold text-foreground">
-              Double Fantasy (with Future)
-            </p>
-            <p className="truncate text-xs text-muted-foreground">
-              The Weeknd, Future
-            </p>
-          </div>
-
-          {/* Spotify icon placeholder */}
-          <svg
-            className="h-5 w-5 shrink-0 text-green-500"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="12" />
-          </svg>
-        </div>
       </div>
     </section>
   );
