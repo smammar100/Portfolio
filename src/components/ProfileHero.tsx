@@ -4,6 +4,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useEffect, useState, useCallback } from "react";
 import { Shader8 } from "@/components/Shader8";
+import MusicArtwork from "@/components/ui/music-artwork";
 
 const TAGLINES = ["Trying to do better", "22 \u00b7 Engineer", "Always Learning"];
 
@@ -43,7 +44,7 @@ export function ProfileHero({ className }: { className?: string }) {
 
       <div className="section-divider" />
       {/* Profile card */}
-      <div className="border-x border-[var(--edge)] flex flex-row gap-4 p-4">
+      <div className="border-x border-[var(--edge)] flex flex-row items-center gap-4 p-4">
         {/* Avatar with glitch effect */}
         <button
           type="button"
@@ -111,6 +112,17 @@ export function ProfileHero({ className }: { className?: string }) {
             </span>
             Coding &middot; Cooking something
           </div>
+        </div>
+
+        {/* Music player - right side */}
+        <div className="hidden sm:block shrink-0">
+          <MusicArtwork
+            artist="Drake"
+            music="Search & Rescue"
+            albumArt="https://a5.mzstatic.com/us/r1000/0/Music116/v4/f9/6d/dc/f96ddc30-396d-6dbb-86fe-399831a26446/23UMGIM39822.rgb.jpg"
+            isSong={true}
+            size={118}
+          />
         </div>
       </div>
     </section>
