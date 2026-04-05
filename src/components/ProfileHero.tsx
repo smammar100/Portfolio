@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Shader8 } from "@/components/Shader8";
 
 const TAGLINES = ["Trying to do better", "22 \u00b7 Engineer", "Always Learning"];
@@ -10,6 +10,7 @@ const TAGLINES = ["Trying to do better", "22 \u00b7 Engineer", "Always Learning"
 export function ProfileHero({ className }: { className?: string }) {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [glitching, setGlitching] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,6 +22,12 @@ export function ProfileHero({ className }: { className?: string }) {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  const triggerGlitch = useCallback(() => {
+    if (glitching) return;
+    setGlitching(true);
+    setTimeout(() => setGlitching(false), 520);
+  }, [glitching]);
   return (
     <section
       className={cn(
@@ -37,17 +44,29 @@ export function ProfileHero({ className }: { className?: string }) {
       <div className="section-divider" />
       {/* Profile card */}
       <div className="border-x border-[var(--edge)] flex flex-row gap-4 p-4">
-        {/* Avatar — rounded square, not circle */}
-        <button type="button" className="shrink-0">
-          <div className="relative size-[118px] overflow-hidden rounded-lg border-2 border-[var(--edge)] bg-secondary">
-            <Image
-              src="/images/pfp1.png"
-              alt="Dhruv Jaradi's avatar"
-              width={118}
-              height={118}
-              className="h-full w-full object-cover"
-              priority
-            />
+        {/* Avatar with glitch effect */}
+        <button
+          type="button"
+          className="shrink-0"
+          onClick={triggerGlitch}
+          onMouseEnter={triggerGlitch}
+        >
+          <div
+            className="avatar-glitch relative size-[118px] overflow-hidden rounded-lg border-2 border-[var(--edge)] bg-secondary"
+            data-glitching={glitching}
+          >
+            <div className="avatar-glitch__trigger relative aspect-square h-auto w-full">
+              <Image
+                src="/images/pfp1.png"
+                alt="Avatar"
+                width={118}
+                height={118}
+                className="h-full w-full select-none rounded-[6px] object-cover"
+                priority
+              />
+            </div>
+            <span className="avatar-glitch__scanlines pointer-events-none absolute inset-0 rounded-[6px]" />
+            <span className="avatar-glitch__rgb pointer-events-none absolute inset-0 rounded-[6px]" />
           </div>
         </button>
 
