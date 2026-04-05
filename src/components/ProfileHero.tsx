@@ -72,41 +72,6 @@ export function ProfileHero({ className }: { className?: string }) {
 
         {/* Info area */}
         <div className="flex min-w-0 flex-1 flex-col gap-1">
-          {/* Top row: info icon + view count */}
-          <div className="flex items-center justify-between">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="size-4 text-muted-foreground"
-            >
-              <circle cx={12} cy={12} r={10} />
-              <path d="M12 16v-4" />
-              <path d="M12 8h.01" />
-            </svg>
-
-            <span className="flex items-center gap-1 text-sm text-muted-foreground">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="size-4"
-              >
-                <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
-                <circle cx={12} cy={12} r={3} />
-              </svg>
-              10,381
-            </span>
-          </div>
-
           {/* Name + verified badge */}
           <h1 className="flex items-center gap-1.5 font-heading font-black text-[30px] leading-tight tracking-normal text-foreground">
             Dhruv Jaradi
